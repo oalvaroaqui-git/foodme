@@ -2,7 +2,7 @@
 // const newrelic = require('newrelic');
 
 const express = require('express');
-const logger = require('pino')();
+// const logger = require('pino')();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
@@ -59,7 +59,7 @@ exports.start = function(PORT, STATIC_DIR, DATA_FILE, TEST_DIR) {
   });
 
   app.post(API_URL_ORDER, jsonParser, function(req, res, next) {
-    logger.info(req.body, 'checkout');
+    // logger.info(req.body, 'checkout');
 
     /*************************************
     /*         Custom attributes         *
