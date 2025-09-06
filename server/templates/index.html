@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
 
-  <!-- Paste New Relic Browser agent here -->
+  <!-- Inject New Relic Browser agent -->
+  {{ newrelic.getBrowserTimingHeader() }}
 
   <title>FoodMe</title>
   <link rel="stylesheet" href="css/app.css">

@@ -4,6 +4,8 @@
 const express = require('express');
 // const logger = require('pino')();
 const morgan = require('morgan');
+const path = require('path');
+const swig = require('swig');
 const bodyParser = require('body-parser');
 
 const fs = require('fs');
@@ -34,6 +36,15 @@ exports.start = function(PORT, STATIC_DIR, DATA_FILE, TEST_DIR) {
 
   // log requests
   app.use(morgan('combined'));
+
+  app.engine('html', swig.renderFile);
+  app.set('view engine', 'html');
+  app.set('views', path.join(__dirname, 'templates'));
+  app.set('view cache', false);
+
+  app.get('/', function (req, res) {
+    res.render('index', {});
+  });
 
   // serve static files for demo client
   app.use(express.static(STATIC_DIR));
@@ -80,7 +91,7 @@ exports.start = function(PORT, STATIC_DIR, DATA_FILE, TEST_DIR) {
     });
     /*************************************/
 
-    return res.send(201, { orderId: Date.now()});
+    return res.send(201, { orderId: Date.now() });
   });
 
   app.get(API_URL_ID, function(req, res, next) {
@@ -109,12 +120,16 @@ exports.start = function(PORT, STATIC_DIR, DATA_FILE, TEST_DIR) {
     return res.send(400, {error: errors});
   });
 
-  app.del(API_URL_ID, function(req, res, next) {
+  app.delete(API_URL_ID, function(req, res, next) {
     if (storage.deleteById(req.params.id)) {
       return res.send(204, null);
     }
     return res.send(400, {error: 'No restaurant with id "' + req.params.id + '"!'});
   });
+
+  if (typeof newrelic !== 'undefined') {
+    app.locals.newrelic = newrelic;
+  }
 
   // read the data from json and start the server
   fs.readFile(DATA_FILE, function(err, data) {
