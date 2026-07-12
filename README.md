@@ -1,6 +1,6 @@
 # FoodMe
 
-Aplicação de demonstração para pedidos de comida a restaurantes locais, construída com **AngularJS 1.x** no frontend e **Node.js/Express** no backend. Este projeto tem origem no workshop [angular-seed](http://github.com/angular/angular-seed) e foi posteriormente adaptado (ver histórico de commits) como aplicação de referência para ensinar **instrumentação de observabilidade / APM** com o New Relic — daí existirem, no código, vários pontos de instrumentação comentados prontos a ativar.
+Aplicação de demonstração para pedidos de comida a restaurantes locais, construída com **AngularJS 1.x** no frontend e **Node.js/Express** no backend. Este projeto tem origem no workshop [angular-seed](http://github.com/angular/angular-seed) e serve como aplicação de referência para exercícios de **instrumentação de observabilidade / APM**.
 
 ---
 
@@ -39,14 +39,10 @@ A aplicação segue um modelo clássico de **SPA (Single Page Application) + API
 ### Persistência de dados
 Não existe base de dados. Ao arrancar, o servidor lê `server/data/restaurants.json` e carrega os restaurantes para memória; ao receber `SIGINT` (Ctrl+C), grava o estado atual de volta no mesmo ficheiro. **Os pedidos (`/api/order`) não são persistidos** — o endpoint apenas responde com um `orderId` fictício (`Date.now()`).
 
-### Observabilidade / APM
-Este é o ponto central do propósito do repositório: existem vários trechos de instrumentação **comentados**, prontos para serem ativados como exercício:
-- `server/index.js` — `require('newrelic')` (agente de servidor) e exposição de `app.locals.newrelic`.
-- `server/templates/index.html` — placeholder `{{ newrelic.getBrowserTimingHeader() }}` para o **Browser Agent**.
-- `server/index.js` (rota `POST /api/order`) — exemplo de **custom attributes** (cliente, restaurante, nº de itens, total do pedido).
-- `app/js/services/cart.js` — exemplo de **custom page action** (`newrelic.addPageAction`) por item comprado.
-- Logging estruturado com `pino` (dependência incluída, também comentado) e logging de acesso HTTP com `morgan` (ativo).
-- Variáveis de ambiente `NEW_RELIC_APP_NAME` e `NEW_RELIC_LICENSE_KEY` já preparadas em `.env`.
+### Observabilidade
+- Logging de acesso HTTP com `morgan` (formato "combined", ativo).
+- Logging estruturado com `pino` (dependência incluída, comentado em `server/index.js`).
+- A aplicação é intencionalmente simples para servir de base a exercícios de instrumentação com o agente APM à escolha.
 
 ---
 
@@ -108,11 +104,11 @@ docker run -p 3000:3000 --env-file .env foodme
 
 ### Variáveis de ambiente (`.env`)
 
-| Variável                  | Finalidade                                   |
-|----------------------------|-----------------------------------------------|
-| `PORT`                     | Porta do servidor Express (default: `3000`)   |
-| `NEW_RELIC_APP_NAME`       | Nome da aplicação no New Relic                |
-| `NEW_RELIC_LICENSE_KEY`    | Chave de licença do agente New Relic          |
+| Variável | Finalidade                                   |
+|----------|-----------------------------------------------|
+| `PORT`   | Porta do servidor Express (default: `3000`)   |
+
+O ficheiro `.env` está atualmente vazio, mas é carregado pelo `npm start` (`node --env-file=.env`) — mantenha-o presente.
 
 ## Comandos úteis para analisar a aplicação
 
@@ -129,8 +125,8 @@ cat server/data/restaurants.json | jq .        # ou restaurants.csv / menus.csv
 # Seguir os logs de acesso HTTP (morgan, formato "combined") em tempo real
 npm start
 
-# Procurar todos os pontos de instrumentação de observabilidade (comentados)
-grep -rn "newrelic\|pino" server app
+# Procurar os pontos de logging/instrumentação existentes
+grep -rn "morgan\|pino" server app
 
 # Ver histórico de evolução da app (ex.: como a instrumentação foi introduzida)
 git log --oneline
