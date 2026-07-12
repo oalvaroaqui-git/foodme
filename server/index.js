@@ -2,7 +2,6 @@ const express = require('express');
 // const logger = require('pino')();
 const morgan = require('morgan');
 const path = require('path');
-const swig = require('swig');
 const bodyParser = require('body-parser');
 
 const fs = require('fs');
@@ -34,13 +33,8 @@ exports.start = function(PORT, STATIC_DIR, DATA_FILE, TEST_DIR) {
   // log requests
   app.use(morgan('combined'));
 
-  app.engine('html', swig.renderFile);
-  app.set('view engine', 'html');
-  app.set('views', path.join(__dirname, 'templates'));
-  app.set('view cache', false);
-
   app.get('/', function (req, res) {
-    res.render('index', {});
+    res.sendFile(path.join(__dirname, 'templates', 'index.html'));
   });
 
   // serve static files for demo client

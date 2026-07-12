@@ -31,7 +31,7 @@ A aplicação segue um modelo clássico de **SPA (Single Page Application) + API
 
 ### Backend (`server/`)
 - **`start.js`** — ponto de entrada; define porta, diretório estático e ficheiro de dados, e arranca o servidor definido em `index.js`.
-- **`index.js`** — configura o Express: logging de pedidos HTTP com `morgan`, motor de views `swig` (renderiza `server/templates/index.html`), servir ficheiros estáticos de `app/`, e a API REST.
+- **`index.js`** — configura o Express: logging de pedidos HTTP com `morgan`, entrega da página principal (`server/templates/index.html`), servir ficheiros estáticos de `app/`, e a API REST.
 - **`model.js`** — define `Restaurant` e `MenuItem` (validação, normalização de campos, criação a partir de linhas CSV).
 - **`storage.js`** — `MemoryStorage`, um armazenamento **em memória** (array), sem persistência real durante a execução.
 - **`server/data/`** — dados de seed (`restaurants.json`, e os CSVs originais `restaurants.csv`/`menus.csv` usados para os gerar).
@@ -72,7 +72,7 @@ Fluxo típico de utilização da aplicação:
 
 ## Requisitos
 
-- Node.js `^22.16.0` (definido em `package.json` → `engines`). **Nota:** o `Dockerfile` atual usa `node:18-alpine`, uma versão inferior à exigida — a rever antes de usar em produção.
+- Node.js `>=22.16.0` (definido em `package.json` → `engines`; o `Dockerfile` usa `node:22-alpine`).
 - npm (instalado com o Node.js).
 
 ## Como correr a aplicação
@@ -148,7 +148,7 @@ foodme/
 │   └── views/               # Templates HTML das rotas
 ├── server/
 │   ├── data/                # Dados de seed (JSON/CSV)
-│   ├── templates/           # Template swig da página principal
+│   ├── templates/           # HTML da página principal
 │   ├── index.js             # Configuração do Express e rotas da API
 │   ├── model.js              # Modelos Restaurant / MenuItem
 │   ├── storage.js            # Armazenamento em memória
