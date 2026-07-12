@@ -1,0 +1,122 @@
+openapi: "3.0.3"
+info:
+  title: FoodMe — API de Pedidos
+  version: "1.0.0"
+  description: Contrato dos endpoints de pedidos (spec 001-persistencia-pedidos).
+
+paths:
+  /api/order:
+    post:
+      summary: Submete um pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items, restaurant]
+              properties:
+                items:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required: [name, price, qty]
+                    properties:
+                      name: { type: string }
+                      price: { type: number }
+                      qty: { type: integer, minimum: 1 }
+                restaurant:
+                  type: object
+                  required: [id, name]
+                  properties:
+                    id: { type: string }
+                    name: { type: string }
+                payment:
+                  type: object
+                  description: >
+                    Apenas o método é persistido (RF-005); os restantes campos
+                    são descartados pelo servidor.
+                deliverTo:
+                  type: object
+                  properties:
+                    name: { type: string }
+                    address: { type: string }
+      responses:
+        "201":
+          description: Pedido criado e persistido
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [orderId]
+                properties:
+                  orderId:
+                    type: string
+                    format: uuid
+        "400":
+          description: Pedido inválido (ex. sem itens)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/order/{id}:
+    get:
+      summary: Consulta um pedido por identificador
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Pedido encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "404":
+          description: Pedido inexistente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Order:
+      type: object
+      required: [id, createdAt, restaurant, items, total]
+      properties:
+        id: { type: string, format: uuid }
+        createdAt: { type: string, format: date-time }
+        restaurant:
+          type: object
+          properties:
+            id: { type: string }
+            name: { type: string }
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              price: { type: number }
+              qty: { type: integer }
+        total: { type: number }
+        paymentMethod:
+          type: string
+          nullable: true
+        deliverTo:
+          type: object
+          nullable: true
+          description: "null após anonimização (30 dias — RF-006)"
+          properties:
+            name: { type: string }
+            address: { type: string }
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error: { type: string }
