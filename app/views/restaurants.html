@@ -4,21 +4,21 @@
 <div class="row-fluid">
 
   <div class="span3 fm-panel">
-    <h4>Filter Restaurants</h4>
+    <h4>Filtrar Restaurantes</h4>
 
     <form>
 
-      <h5>Rating</h5>
+      <h5>Avaliação</h5>
 
       <fm-rating ng-model="$parent.filter.rating"></fm-rating>
 
 
-      <h5>Price</h5>
+      <h5>Preço</h5>
 
       <fm-rating ng-model="$parent.filter.price" symbol="$"></fm-rating>
 
 
-      <h5>Cuisine</h5>
+      <h5>Culinária</h5>
 
       <div fm-checkbox-list ng-model="filter.cuisine">
         <label ng-repeat="(name, title) in CUISINE_OPTIONS" class="checkbox">
@@ -32,17 +32,17 @@
   <div class="span9 fm-panel fm-restaurant-list">
     <h4>
       <ng-pluralize count="restaurants.length"
-                    when="{'0'    : 'No restaurants found. :-(',
-                           'one'  : '1 restaurant found!',
-                           'other': '{} restaurants found!'}">
+                    when="{'0'    : 'Nenhum restaurante encontrado. :-(',
+                           'one'  : '1 restaurante encontrado!',
+                           'other': '{} restaurantes encontrados!'}">
       </ng-pluralize>
     </h4>
 
     <table class="table table-hover table-striped">
       <tr>
-        <th><a href ng-click="sortBy('name')">Name {{sortIconFor('name')}}</a></th>
-        <th><a href ng-click="sortBy('price')">Price {{sortIconFor('price')}}</a></th>
-        <th><a href ng-click="sortBy('rating')">Rating {{sortIconFor('rating')}}</a></th>
+        <th><a href ng-click="sortBy('name')">Nome {{sortIconFor('name')}}</a></th>
+        <th><a href ng-click="sortBy('price')">Preço {{sortIconFor('price')}}</a></th>
+        <th><a href ng-click="sortBy('rating')">Avaliação {{sortIconFor('rating')}}</a></th>
       </tr>
       <tr ng-repeat="restaurant in restaurants">
         <td>

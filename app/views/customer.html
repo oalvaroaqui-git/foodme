@@ -4,23 +4,23 @@
 <form class="form-horizontal" name="customerForm" novalidate>
   <div class="modal">
     <div class="modal-header">
-      <h3>Get Started</h3>
+      <h3>Comece Agora</h3>
     </div>
     <div class="modal-body">
 
       <div class="control-group">
-        <label class="control-label" for="customerName">Your Name</label>
+        <label class="control-label" for="customerName">Seu Nome</label>
         <div class="controls">
-          <input type="text" id="customerName" placeholder="Joe Black"
+          <input type="text" id="customerName" placeholder="João Silva"
                  class="input-medium"
                  ng-model="customerName" required>
         </div>
       </div>
 
       <div class="control-group">
-        <label class="control-label" for="address">Delivery Address</label>
+        <label class="control-label" for="address">Endereço de Entrega</label>
         <div class="controls">
-          <input type="text" id="address" placeholder="432 Wiggly Rd, Mountain View, 94043"
+          <input type="text" id="address" placeholder="Rua das Flores, 432, São Paulo, 01234-567"
                  class="input-xlarge"
                  ng-model="customerAddress" required>
         </div>
@@ -30,7 +30,7 @@
     <div class="modal-footer">
       <button class="btn btn-primary"
               ng-disabled="customerForm.$invalid"
-              ng-click="findRestaurants(customerName, customerAddress)">Find Restaurants!</button>
+              ng-click="findRestaurants(customerName, customerAddress)">Buscar Restaurantes!</button>
     </div>
   </div>
 </form>

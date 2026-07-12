@@ -26,7 +26,7 @@ foodMeApp.service('cart', function Cart(localStorage, customer, $rootScope, $htt
         self.items.push(item);
       }
     } else {
-      alert('Can not mix menu items from different restaurants.');
+      alert('Não é possível misturar itens de restaurantes diferentes.');
     }
   };
 

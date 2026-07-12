@@ -72,19 +72,19 @@ foodMeApp.controller('RestaurantsController',
 
 
   $scope.CUISINE_OPTIONS = {
-    african: 'African',
-    american: 'American',
-    barbecue: 'Barbecue',
-    cafe: 'Cafe',
-    chinese: 'Chinese',
-    'czech/slovak': 'Czech / Slovak',
-    german: 'German',
-    indian: 'Indian',
-    japanese: 'Japanese',
-    mexican: 'Mexican',
+    african: 'Africana',
+    american: 'Americana',
+    barbecue: 'Churrasco',
+    cafe: 'Café',
+    chinese: 'Chinesa',
+    'czech/slovak': 'Tcheca / Eslovaca',
+    german: 'Alemã',
+    indian: 'Indiana',
+    japanese: 'Japonesa',
+    mexican: 'Mexicana',
     pizza: 'Pizza',
-    thai: 'Thai',
-    vegetarian: 'Vegetarian'
+    thai: 'Tailandesa',
+    vegetarian: 'Vegetariana'
   };
 
 });

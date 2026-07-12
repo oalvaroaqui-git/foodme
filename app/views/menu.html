@@ -31,7 +31,7 @@
 <div class="row-fluid">
 
   <div class="span8 fm-panel fm-menu-list">
-    <h4>Menu</h4>
+    <h4>Cardápio</h4>
 
 
     <ul>
@@ -47,7 +47,7 @@
   </div>
 
   <div class="span4 fm-panel fm-cart">
-    <h4>Your order</h4>
+    <h4>Seu pedido</h4>
     <form>
       <ul class="unstyled">
         <li ng-repeat="item in cart.items">
@@ -56,7 +56,7 @@
         </li>
       </ul>
       <div class="pull-right" ng-show="cart.items.length">
-        <a href="#/checkout" ng-disabled="!cart.items.length" class="btn">Checkout</a>
+        <a href="#/checkout" ng-disabled="!cart.items.length" class="btn">Finalizar Pedido</a>
       </div>
       <p>
         <b>Total: {{cart.total() | currency}}</b>

@@ -35,4 +35,4 @@ specs/NNN-nome-da-funcionalidade/
 
 | Nº  | Funcionalidade                              | Estado    |
 |-----|---------------------------------------------|-----------|
-| 001 | [Persistência de Pedidos](001-persistencia-pedidos/spec.md) | Aprovada — plano criado |
+| 001 | [Persistência de Pedidos](001-persistencia-pedidos/spec.md) | Pronta para implementar |
