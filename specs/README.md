@@ -36,3 +36,4 @@ specs/NNN-nome-da-funcionalidade/
 | Nº  | Funcionalidade                              | Estado    |
 |-----|---------------------------------------------|-----------|
 | 001 | [Persistência de Pedidos](001-persistencia-pedidos/spec.md) | Pronta para implementar |
+| 002 | [Persistência em PostgreSQL](002-persistencia-postgres/spec.md) | Pronta para implementar (depende da 001) |
