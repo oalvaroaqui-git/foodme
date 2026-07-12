@@ -69,6 +69,6 @@ foodMeApp.directive('fmRating', function() {
           '{{symbol}}' +
         '</li>' +
       '</ul>' +
-      '<a ng-hide="readonly" ng-click="select(null)">clear</a>'
+      '<a ng-hide="readonly" ng-click="select(null)">limpar</a>'
   };
 });
